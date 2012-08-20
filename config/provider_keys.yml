@@ -8,6 +8,9 @@ development:
   google:
     consumer_key: 18554699237-08rp4n8g3qk3hqu86n3luv8n2nkfda3i.apps.googleusercontent.com
     consumer_secret: Y5lzJrl1_WMu7TW1ZOVi5qYi
+  dwolla:
+    consumer_key: pfq6x8U6ib0M84dL+C2uyDJ3qQeUmITFiTmLyx9F4Jz9U/KuEq
+    consumer_secret: KZ1uZSfMwcUuPuSBoXczUxqPYuuLtoiByVxR/af522c1ndBNMO
 
 test:
   facebook:

@@ -18,4 +18,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider_keys[Rails.env]['google']['consumer_key'],
     provider_keys[Rails.env]['google']['consumer_secret']
   )
+  provider(
+    :dwolla,
+    provider_keys[Rails.env]['dwolla']['consumer_key'],
+    provider_keys[Rails.env]['dwolla']['consumer_secret'],
+    display: 'popup',
+    scope: 'accountinfofull|send|request'
+  )
 end

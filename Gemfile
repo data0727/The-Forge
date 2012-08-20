@@ -33,6 +33,7 @@ gem 'omniauth' # It's a sane default these days
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-dwolla'
 
 gem 'braintree'
 

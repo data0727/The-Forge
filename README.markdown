@@ -1,9 +1,15 @@
-Communal
+The Forge
 ========
 
-An engine for communal experiments.
+The Forge is about building a community of decentralized professionals and apprentices alike, who can work together in an agile manner, on a variety of projects. It will provide the tools to track all the various bits of projects, user stories, tasks, resouce management, budget constraints, etc. , and provide for project funding, escrow, and developer payment.
 
-Welcome to the community.
+We also want to provide an easy way to crowd fund ideas. That will definitely be built in.
+
+Additionally, it's a game. Everyone has the chance to earn badges, level up, and earn new opportunities not available to the peons below you!
+
+So download this, mod it, and start your own node. Or feel free to sign up with our (root service)[http://theforge.deepwoodsbrigade.com].
+
+Eitherway, welcome to the community.
 
 Requirements
 ============
@@ -43,43 +49,3 @@ Finally Bundle!
     gem install bundler --no-ri --no-rdoc
     bundle install
 
-
-Community Clarity
-=======
-
-In reference to [issue #1](https://github.com/rebelhold/communal/issues/1) [Ellie](https://github.com/Eilie) asked for a clearer description and a way to participate. [m3talsmith](http://github.com/m3talsmith) has added the following:
-
-> The goal of the project is to build the tools needed to run a RebelOutpost of any other community project. We are intentionally keeping users anonymous by default and allowing them to add personal info later on (currently just a nickname).
-> 
-> Right now I'm building the identity side so that oauth isn't just through services like facebook, twitter, or google. We also hope to build wrappers for other oauth services as well.
-> 
-> Some of the features envisioned are:
->
-> * private encryption dictionaries to encrypt posts and messages (which would be a sort of public/private key)
-> * community voting on putting posts on the front page from various users
-> * a time share system
-> * a bartering system
-> * personal theming
-> * community theming
-> * bitcoin exchanges
-> * a scrum planning system
-> * an invoice/expense tracking
-> * a user rating system
-> * a project rating system
-> * an outpost rating system
-> * a communal (publically owned) resource sharing and tracking program
-> * and a shared portfolio
-> 
-> Basically everything you'll need to easily communicate with each other and the people you do work with.
-> 
-> This is planned as a decentralized service so connecting to other nodes by user preference will be part of the design.
-> 
-> Much more planning is in the works...
-> 
-> If you are interested in helping we have [a public pivotal](https://www.pivotaltracker.com/projects/443041) on it that we are building stories with. Or you could just catch me on Skype sometime. My Skype is rebel-michael.
-
-So that's what he says.
-
-This is a community project.
-
-[What do you say?](https://github.com/rebelhold/communal/issues/1)

@@ -11,6 +11,13 @@ So download this, mod it, and start your own node. Or feel free to sign up with 
 
 Eitherway, welcome to the community.
 
+Update
+------
+
+When we first started this project we didn't have a name. Now that we do we've moved the repository to reflect that. The official git repository resides at: [http://github.com/thedeepwoodsbrigade/the-forge]
+
+Please update your forks etc.
+
 Requirements
 ============
 

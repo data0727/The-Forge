@@ -50,7 +50,6 @@ group :development do
 end
 
 group :test, :development do
-  gem 'ruby-debug19', require: 'ruby-debug'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'capybara'

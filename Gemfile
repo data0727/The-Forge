@@ -15,7 +15,6 @@ gem 'haml_coffee_assets'
 gem 'execjs'
 
 gem 'jquery-rails'
-gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'mongoid', '3.0.0.rc'
 gem 'moped', '1.0.0.rc'

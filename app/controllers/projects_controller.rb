@@ -16,6 +16,10 @@ class ProjectsController < ApplicationController
     redirect_to @project, flash: {notice: 'Your project has been morphed'}
   end
 
+  def index
+    @projects = @current_user.projects
+  end
+
   def destroy
     @project.destroy
     redirect_to :dashboard, flash: {notice: "Your Project has been completely obliterated by unforgiving gnomes!"}

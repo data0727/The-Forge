@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
       redirect_to redirect_path and return
     end
+    redirect_to [:projects]
   end
 
   def edit

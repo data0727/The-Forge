@@ -1,0 +1,15 @@
+.tiles
+  %a.tile.icon.bg-color-green{href: new_project_path}
+    .tile-content
+      %h1.icon-large.icon-lab
+    .brand
+      .name
+        Create a Project
+ 
+    - @projects.each do |project|      
+      %a.tile.icon.bg-color-green{href: edit_project_path(project)}
+        .tile-content
+          %h1.icon-large.icon-database
+        .brand
+          .name
+            = project.name

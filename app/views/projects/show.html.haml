@@ -1,5 +1,20 @@
-%h2 #{@project.name}
-= link_to 'Add Funds', [:new, @project, :transaction], class: 'btn btn-success'
+%h2 Project Name: #{@project.name}
+%button.bg-color-red
+  = link_to 'Delete This Project', [@project], method: :delete, class: 'btn btn-danger'
+
+.tiles
+  %a.tile.icon.bg-color-green{href: projects_path}
+    .tile-content
+      %h1.icon-large.icon-lab
+    .brand
+      .name
+        Projects
+  %a.tile.icon.bg-color-orange{href: edit_project_path(@project)}
+    .tile-content
+      %h1.icon-large.icon-lab
+    .brand
+      .name
+        Edit Project Name
 = link_to 'Create an Epic', [:new, @project, :epic], class:'btn'
 = link_to 'Add A User', [:new, @project, :user], class:'btn'
 
@@ -24,7 +39,8 @@ Points
       %th &nbsp;
     %tbody.persons
       - @project.users.each do |user|
-        %tr.person{id: user.nickname}
-          %td= link_to user.nickname.titleize, [:edit, @project, user]
-          %td
-            = link_to 'Delete user', [@project, user], method: :delete, class: 'btn btn-danger'
+        - if user.nickname
+          %tr.person{id: user.nickname}
+            %td= link_to user.nickname.titleize, [:edit, @project, user]
+            %td
+              = link_to 'Delete user', [@project, user], method: :delete, class: 'btn btn-danger'

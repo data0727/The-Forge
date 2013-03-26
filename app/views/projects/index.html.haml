@@ -5,11 +5,19 @@
     .brand
       .name
         Create a Project
+
+  %a.tile.icon.bg-color-orange{href: edit_user_path(@current_user)}
+    .tile-content
+      %h1.icon-large.icon-pencil
+    .brand
+      .name
+        Edit User Nick Name
  
-    - @projects.each do |project|      
-      %a.tile.icon.bg-color-green{href: edit_project_path(project)}
-        .tile-content
-          %h1.icon-large.icon-database
-        .brand
-          .name
-            = project.name
+- @projects.each do |project|      
+  .tiles
+    %a.tile.icon.bg-color-green{href: project_path(project)}
+      .tile-content
+        %h1.icon-large.icon-database
+      .brand
+        .name
+          = project.name

@@ -15,8 +15,13 @@
     .brand
       .name
         Edit Project Name
+  %a.tile.icon.bg-color-blue{href: new_project_user_path(@project)}
+    .tile-content
+      %h1.icon-large.icon-user
+    .brand
+      .name
+        Add A User
 = link_to 'Create an Epic', [:new, @project, :epic], class:'btn'
-= link_to 'Add A User', [:new, @project, :user], class:'btn'
 
 Points
 = @project.points

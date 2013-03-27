@@ -11,7 +11,7 @@ class Projects::Epics::StoriesController < Projects::EpicsController
 
   def create
     @story = @epic.stories.create params[:story]
-    redirect_to [@project, @epic, @story]
+    redirect_to [@project, @epic]
   end
 
   def update

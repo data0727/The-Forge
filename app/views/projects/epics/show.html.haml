@@ -1,19 +1,40 @@
-%hr #{@epic.name}
-= link_to 'Create a Story', [:new, @project, @epic, :story], class: 'btn'
+%h1 Epic Name: #{@epic.name}
+.tiles
+  %a.tile.icon.bg-color-green{href: new_project_epic_story_path(@project, @epic)}
+    .tile-content
+      %h1.icon-large.icon-lab
+    .brand
+      .name
+        Create a Task
+
+  %a.tile.icon.bg-color-green{href: project_path(@project)}
+    .tile-content
+      %h1.icon-large.icon-lab
+    .brand
+      .name
+        Projects
 Points
 = @epic.points
 %table
   %thead
     %tr
-      %th Story Name
+      %th Task Name
       %th &nbsp;
     %tbody.stories
       - @epic.stories.each do |story|
         %tr.story
-          %td= link_to story.name.titleize, [:edit, @project, @epic, story]
           %td
-            = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
-            = link_to 'Edit a Story', [:edit, @project, @epic, story], class: 'btn btn-primary'
+            %a.tile.icon.bg-color-yellow{href: edit_project_epic_story_path(@project, @epic, story)}
+              .tile-content
+                %h1.icon-large.icon-star-2
+              .brand
+                .name
+                  = story.name
+          %td
+            %button.bg-color-red
+              = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
+            %button.bg.color-orange
+              = link_to 'Edit a Story', [:edit, @project, @epic, story]
             - if story.status == 'accepted' || story.status == 'denied'
               = link_to 'restart', [:start, @project, @epic, story], class: 'btn btn-primary'
             - elsif story.next_step == 'accept' || story.next_step == 'deny'

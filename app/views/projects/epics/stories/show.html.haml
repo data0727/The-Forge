@@ -20,6 +20,7 @@
       - @story.tasks.each do |task|
         %tr.task
           %td= link_to task.description, [:edit, @project, @epic, @story, task]
+             = link_to task.comments,
           %td
             = link_to 'Delete a Task', [@project, @epic, @story, task], method: :delete, class: 'btn btn-danger'
             = link_to 'Edit a Task', [:edit, @project, @epic, @story, task]

@@ -30,15 +30,25 @@ Points
               .brand
                 .name
                   = story.name
+            %a.tile.icon.bg-color-yellow{href: project_epic_story_comments_path(@project, @epic, story)}
+              .tile-content
+                %h1.icon-large.icon-star-2
+              .brand
+                .name
+                  Comments
           %td
             %button.bg-color-red
               = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
-            %button.bg.color-orange
+            %button.bg-color-orange
               = link_to 'Edit a Story', [:edit, @project, @epic, story]
             - if story.status == 'accepted' || story.status == 'denied'
-              = link_to 'restart', [:start, @project, @epic, story], class: 'btn btn-primary'
+              %button.bg-color-red
+                = link_to 'restart', [:start, @project, @epic, story], class: 'btn btn-primary'
             - elsif story.next_step == 'accept' || story.next_step == 'deny'
-              = link_to 'accept', [:accept, @project, @epic, story], class: 'btn btn-primary'
-              = link_to 'deny', [:deny, @project, @epic, story], class: 'btn btn-primary'
+              %button.bg-color-green
+                = link_to 'accept', [:accept, @project, @epic, story], class: 'btn btn-primary'
+              %button.bg-color-red
+                = link_to 'deny', [:deny, @project, @epic, story], class: 'btn btn-primary'
             - else
-              = link_to story.next_step, [story.next_step.to_sym, @project, @epic, story], class: 'btn btn-primary'
+              %button.bg-color-green
+                = link_to story.next_step, [story.next_step.to_sym, @project, @epic, story], class: 'btn btn-primary'

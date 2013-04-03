@@ -1,0 +1,11 @@
+- @comments.each do |comment|
+  %div
+    %h2  #{comment.user_nickname}
+    %p  #{comment.description}
+
+%a.tile.icon.bg-color-green{href: new_project_epic_story_comment_path(@project, @epic, @story)}
+  .tile-content
+    %h1.icon-large.icon-lab
+  .brand
+    .name
+      Create a Comment

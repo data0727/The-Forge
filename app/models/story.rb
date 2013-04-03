@@ -13,6 +13,7 @@ class Story
 
   belongs_to :epic
   has_many   :tasks
+  has_many   :comments
   has_one    :account
 
   after_create :init_account
@@ -61,6 +62,14 @@ class Story
 
   def next_step
     STEPS[STEPS.index(status.gsub(/ed/, '')) + 1]
+  end
+
+  def find_points
+    if status == 'completed'
+      return points
+    else
+      return 0
+    end
   end
 
   def find_position

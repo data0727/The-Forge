@@ -8,6 +8,6 @@ class Epic
   has_many :stories
 
   def points
-    stories.map(&:points).compact.sum
+    stories.where(status: 'accepted').map(&:points).compact.sum
   end
 end

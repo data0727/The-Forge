@@ -37,8 +37,7 @@ Points
                 .name
                   Comments
           %td
-            %button.bg-color-red
-              = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'btn btn-danger'
+            = link_to 'Delete a Story', [@project, @epic, story], method: :delete,class: 'button bg-color-red'
             %button.bg-color-orange
               = link_to 'Edit a Story', [:edit, @project, @epic, story]
             - if story.status == 'accepted' || story.status == 'denied'

@@ -4,12 +4,16 @@ describe 'Create a Project' do
   use_vcr_cassette
 
   before do
-    login_facebook
+    login_google
     @user = User.first
     @user.update_attribute :nickname, 'solo'
     @user.reload
 
     @user2 = FactoryGirl.create :user, nickname:'chewbacca' 
+  end
+
+  it 'passes a test to make me feel better about myself' do
+    User.first
   end
 
   it 'creates a project' do

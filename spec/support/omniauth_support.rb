@@ -26,9 +26,9 @@ module OmniauthSupport
     })
   end
 
-  def login_facebook
+  def login_google
     visit root_path
-    click_link 'Facebook'
+    click_link 'Google'
     return User.first
   end
 end

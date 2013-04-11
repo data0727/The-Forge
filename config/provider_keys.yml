@@ -16,8 +16,8 @@ test:
 
 production:
   twitter:
-    consumer_key: h2lhg3ykLzLyvAeyNWNS2g
-    consumer_secret: kGdzsCoki0hzdGoRmyLqW7ibYF5KRQo5FRADY7VyRuE
+    consumer_key: XPT2Uvn5zY9SmXXW3Ke6Q
+    consumer_secret: WbKtRWM6P85ALzluVWqW5O9NQ9P04kLA3yR1N4IL1w
   google:
     consumer_key: 815206093484-f03jeps5egpajvjddn87pjmo052sene2.apps.googleusercontent.com
     consumer_secret: neQ9bL0XxEl8nZa_UxBjmWer

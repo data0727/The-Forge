@@ -5,7 +5,7 @@ describe 'Develop Projects' do
   before do
     @owner = FactoryGirl.create :user
 
-    login_facebook
+    login_google
 
     @developer = User.last
     @project   = FactoryGirl.create :project, users: [@owner, @developer]

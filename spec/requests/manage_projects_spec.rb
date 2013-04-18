@@ -12,14 +12,11 @@ describe 'Create a Project' do
     @user2 = FactoryGirl.create :user, nickname:'chewbacca' 
   end
 
-  it 'passes a test to make me feel better about myself' do
-    User.first
-  end
-
   it 'creates a project' do
     Project.count.should == 0
 
-    all('a[text()="Create a Project"]').first.click
+    click_link 'Create a Project'
+
     fill_in 'Name', with: 'projectname'
     click_button 'Save'
 
@@ -30,7 +27,7 @@ describe 'Create a Project' do
   context 'with a project' do
     before do
       @project = FactoryGirl.create :project, name: 'han', users: [@user]
-      visit url_for :dashboard
+      visit url_for [:projects]
     end
 
     it 'shows the users projects' do
@@ -40,9 +37,8 @@ describe 'Create a Project' do
     end
 
     it 'edits a project' do
-      within('.projects') do
-        click_link 'edit'
-      end
+      visit url_for([@project])
+      click_link 'Edit Project Name'
 
       fill_in :name, with: 'numbfoot'
       click_button 'Save'
@@ -54,11 +50,11 @@ describe 'Create a Project' do
     it 'deletes a project' do
       Project.count.should == 1
 
-      within('.project') do
-        click_link 'delete'
-      end
+      visit url_for([@project])
 
-      current_url.should == url_for(:dashboard)
+      click_link 'Delete This Project'
+
+      current_url.should == url_for([:projects])
       Project.count.should == 0
     end
 
@@ -101,15 +97,13 @@ describe 'Create a Project' do
         @project.reload
         @project.users.count.should == 1
       end
-
-      it 'does not delete the current user logged in'
     end
 
     it 'creates an epic' do
       Epic.count.should == 0
 
       visit url_for(@project)
-      click_link 'Create an Epic'
+      click_link 'Add An Epic'
       fill_in :name, with: 'EpicBattleofAwesome'
       click_button 'Save'
       
@@ -155,23 +149,17 @@ describe 'Create a Project' do
 
       it 'views an epic' do
         epic = @project.epics.first
-        epic.stories.create name: 'view story in epic view'
 
         visit url_for([@project])
-        click_link epic.name.titleize
-
-        current_url.should == url_for([@project, epic])
         page.should have_content(epic.name)
-        page.should have_content('View Story In Epic View')
       end
 
       it 'creates a story' do
         Story.count.should == 0
         visit url_for([@project, @epic])
-        click_link 'Create a Story'
+        click_link 'Create a Task'
         fill_in 'Name', with: 'wachutu'
         fill_in 'Description', with: 'thealbinobatfromaceventura'
-        fill_in 'Estimate', with: '123456789'
         click_button 'Save'
         
         Story.count.should == 1
@@ -181,7 +169,8 @@ describe 'Create a Project' do
         story.name.should == 'wachutu'
         story.description.should == 'thealbinobatfromaceventura'
 
-        current_url.should == url_for([@project, @epic, story])
+        current_url.should == url_for([@project, @epic])
+        page.should have_content(story.name)
       end
 
       context 'with a story' do

@@ -13,11 +13,13 @@
       .name
         Edit User Nick Name
  
-- @projects.each do |project|      
-  .tiles
-    %a.tile.icon.bg-color-green{href: project_path(project)}
-      .tile-content
-        %h1.icon-large.icon-database
-      .brand
-        .name
-          = project.name
+.projects
+  - @projects.each do |project|      
+    .project
+      .tiles
+        %a.tile.icon.bg-color-green{href: project_path(project)}
+          .tile-content
+            %h1.icon-large.icon-database
+          .brand
+            .name
+              = project.name

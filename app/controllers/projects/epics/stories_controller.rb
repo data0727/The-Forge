@@ -15,7 +15,6 @@ class Projects::Epics::StoriesController < Projects::EpicsController
   end
 
   def update
-    binding.pry
     @story.update_attributes params[:story]
     redirect_to [@project, @epic] 
   end

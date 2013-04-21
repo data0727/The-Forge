@@ -10,3 +10,5 @@ Installation for Ubuntu
 3. run 'bundle' from command line
 
 4. run 'rails s' from command line
+
+5. go to 'localhost:3000' in your favorite browser

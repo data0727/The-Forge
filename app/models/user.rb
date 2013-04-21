@@ -6,7 +6,6 @@ class User
 
   embeds_many :providers
 
-  has_many :accounts
   has_and_belongs_to_many :projects
 
   after_create :init_account

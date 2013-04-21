@@ -195,7 +195,6 @@ describe 'Create a Project' do
           current_url.should == url_for([:edit, @project, @epic, @story])
           fill_in 'Name', with: 'fitslikeaglove'
           fill_in 'Description', with: 'monopolyman'
-          fill_in 'Estimate', with: '1.00'
           click_button 'Save'
           current_url.should == url_for([@project, @epic])
           
@@ -224,163 +223,17 @@ describe 'Create a Project' do
 
         
         it 'shows the projects point' do
-            Project.count.should == 1
-            Story.count.should == 1
-            @story.points.should == 3
-
-            visit url_for(@project)
-            page.should have_content('Points')
-            page.should have_content('3')
-        end
-
-        it 'shows the epics points' do
-          Epic.count.should == 1
+          @story = @project.epics.first.stories.first
+          Project.count.should == 1
+          Story.count.should == 1
           @story.points.should == 3
+          @story.status = 'completed'
+          @story.save!
+          @story.reload
 
-          visit url_for([@project, @epic])
+          visit url_for(@project)
           page.should have_content('Points')
           page.should have_content('3')
-        end
-
-        it 'creates a task' do  
-          Task.count.should == 0
-          visit url_for([@project, @epic, @story])
-          click_link 'Create a Task'
-          fill_in 'Description', with: 'fitslikeaglove'
-          check 'Completed'
-          click_button 'Save'
-           
-          Task.count.should == 1
-          
-          @story.reload
-          task = @story.tasks.first
-          task.description.should == 'fitslikeaglove'
-          task.status.should == 'completed'
-          current_url.should == url_for([@project, @epic, @story, task])
-        end
-
-        context 'with a task' do
-          before do 
-            @task = FactoryGirl.create :task, description: 'temp', status: 'completed', story: @story
-          end
-
-          it 'deletes a task' do
-            Task.count.should == 1
-            visit url_for([@project, @epic, @story])
-            click_link 'Delete a Task'
-        
-            current_url.should == url_for([@project, @epic, @story])
-            Task.count.should == 0
-          end
-
-          it 'edits a task' do
-            Task.count.should == 1
-            visit url_for([@project, @epic, @story])
-            click_link 'Edit a Task'
-            current_url.should == url_for([:edit, @project, @epic, @story, @task])
-            fill_in 'Description', with: 'monopolyman'
-            uncheck 'Completed'
-            click_button 'Save'
-            current_url.should == url_for([@project, @epic, @story])
-          
-            @story.reload
-            @task = @story.tasks.first
-            @task.description.should == 'monopolyman'
-            @task.status.should == 'pending'
-          end
-        end
-
-        context 'with capital' do
-          before do
-            @user.accounts.first.fund 300
-          end
-
-          it 'funds a project from an account view' do
-            project_account = @user.projects.first.account
-            user_account    = @user.accounts.first
-
-            @user.accounts.count.should == 1
-            
-            project_account.should be
-            user_account.balance.should == 300
-
-            project_account.update_attribute :nickname, 'project'
-            project_account.reload
-
-            visit url_for [@user, :accounts]
-
-            click_link 'Transfer Funds'
-
-            select user_account.nickname,    from: 'From Account'
-            select project_account.nickname, from: 'To Account'
-            fill_in 'Amount', with: 75
-
-            click_button 'Transfer'
-
-            current_url.should == url_for([@user, :accounts])
-
-            user_account.reload.balance.should    == 225
-            project_account.reload.balance.should == 75
-          end
-
-          it 'funds a project from a project view' do
-            user_account    = @user.accounts.first
-            project_account = @project.account
-            project_account.balance.should == 0.0
-            user_account.balance.should == 300
-            visit url_for([@project])
-
-            click_link 'Add Funds'
-
-            select user_account.nickname, from: 'From Account'
-            fill_in 'Amount', with: 37
-
-            click_button 'Transfer'
-
-            current_url.should == url_for([@project])
-            
-            user_account.reload.balance.should == 263
-            project_account.reload.balance.should == 37
-          end
-
-          context 'with funding' do
-            before do
-              @project.update_attribute :budget, 900
-              @user.accounts.first.fund 300
-              @user.accounts.first.transfer amount: 300, account: @project.account.id
-              @story2 = FactoryGirl.create :story, epic: @epic, estimate: 50, status: 'completed'
-              @storys = FactoryGirl.create :story, epic:@epic, estimate: 100, status: 'pending'
-            end
-
-            it 'client increases funds manually per story' do
-              project_account = @project.account
-              project_account.balance.should == 300
-
-              visit url_for [@project, @epic, @story]
-
-              click_link 'Add Funds'
-              select @user.accounts.first.nickname, from: 'From Account'
-              fill_in 'Amount', with: 100
-              click_button 'Transfer'
-
-              current_url.should == url_for([@project, @epic, @story])
-              
-              @project.reload
-              @project.budget.should         == 900 # = total project budget
-              @project.estimated.should      == 150 # = sum of stories estimated cost
-              @project.allotted.should       == 100 # = sum of stories estimated but not completed
-              @project.spent.should          == 50  # = sum of stories completed
-              @project.funded.should         == 300 # = sum of funds deposited against the balance
-              @project.balance.should        == 750 # = budget - (allotted + spent)
-              @project.funded_balance.should == 150 # = funded - (allotted + spent)
-            end
-
-            # Slated as a possible later course
-            it 'automatically disperses funds as a percentage across stories'
-            it 'does not automatically disperse more than a maximum amount per story if set'
-            it 'automatically disperses funds as a share count'
-            it 'automatically disperses funds weighted by story priority'
-          end
         end
       end
     end

@@ -12,11 +12,8 @@ class Story
   field :position, type: Integer
 
   belongs_to :epic
-  has_many   :tasks
   has_many   :comments
-  has_one    :account
 
-  after_create :init_account
   after_create :find_position
 
   STEPS = %w(waiting start finish deliver accept)
@@ -47,17 +44,10 @@ class Story
 
   def accept
     update_attribute :status, 'accepted'
-    epic.project.account.transfer amount: estimate, account: story_owner.primary_account.id
   end
 
   def deny story_details
-    tasks = story_details.delete('tasks')
-    tasks.each do |task|
-      failed_task = Task.find(task[1]['id'])
-      failed_task.update_attribute :status, 'denied' if task[1]['status']
-    end
-
-    update_attributes story_details
+    update_attribute :status, 'denied'
   end
 
   def next_step

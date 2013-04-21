@@ -1,30 +1,7 @@
 RebelFoundation::Application.routes.draw do
 
   # Users
-  resources :users do
-    resources :transactions, controller: 'users/transactions'
-    resources :accounts, controller: 'users/accounts' do
-      resources :orders, controller: 'users/accounts/orders' do
-        member do
-          get :process
-          get :transfer
-          get :funded
-        end
-      end
-    end
-    resources :providers, controller: 'users/providers' do
-      get :update
-      get :destroy
-    end
-    resources :posts, controller: 'users/posts' do
-      collection do
-        get :drafts
-      end
-      member do
-        get :publish
-      end
-    end
-  end
+  resources :users 
   resources :projects do
     resources :transactions, controller: 'projects/transactions'
     resources :epics, controller: 'projects/epics' do
@@ -38,11 +15,7 @@ RebelFoundation::Application.routes.draw do
           get :accept
           get :restart
         end
-        resources :tasks, controller: 'projects/epics/stories/tasks'
         resources :comments, controller: 'projects/epics/stories/comments'
-        resource :account, controller: 'projects/epics/stories/accounts' do
-          resources :transactions, controller: 'projects/epics/stories/accounts/transactions'
-        end
       end
     end
     resources :users, controller: 'projects/users'

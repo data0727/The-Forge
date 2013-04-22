@@ -21,39 +21,12 @@ class Project
     compact
   end
 
-  def estimated
-    stories.map(&:estimate).
-    flatten.
-    compact.
-    sum
-  end
-
-  def allotted
-    stories.select {|story| story.status != 'completed'}.
-    flatten.
-    compact.
-    map(&:estimate).
-    sum
-  end
-
   def spent
     stories.select {|story| story.status == 'completed'}.
     flatten.
     compact.
     map(&:estimate).
     sum
-  end
-
-  def funded
-    account.transactions.map(&:amount).sum
-  end
-
-  def funded_balance
-    funded - (allotted + spent)
-  end
-
-  def balance
-    budget - (allotted + spent)
   end
 
   def points

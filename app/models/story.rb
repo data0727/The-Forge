@@ -4,10 +4,8 @@ class Story
 
   field :name
   field :description
-  field :estimate, type: Float, default: 0.00
   field :story_owner_id
   field :status, default: 'waiting'
-  field :deny_description
   field :points, type: Integer
   field :position, type: Integer
 
@@ -17,10 +15,6 @@ class Story
   after_create :find_position
 
   STEPS = %w(waiting start finish deliver accept)
-
-  def init_account
-    self.account = Account.create nickname: 'primary'
-  end
 
   def story_owner= user
     self.story_owner_id = user.id
@@ -65,15 +59,4 @@ class Story
   def find_position
    update_attribute :position, Story.count - 1
   end
-
-  def change_position new_position
-    stories = epic.stories - [self]
-    stories.insert new_position, self
-
-    stories.each_with_index {|story, index| story.update_attribute :position, index }
-
-    epic.stories = stories
-    epic.save
-  end
-
 end

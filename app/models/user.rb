@@ -8,7 +8,6 @@ class User
 
   has_and_belongs_to_many :projects
 
-  after_create :init_account
 
   class << self
     
@@ -31,13 +30,5 @@ class User
 
     providers.create name: provider, uid: uid
     save
-  end
-
-  def init_account
-    accounts.create nickname: 'primary', primary: true
-  end
-
-  def primary_account
-    accounts.where(primary: true).first
   end
 end
